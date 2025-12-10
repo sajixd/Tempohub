@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TempoHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        /* Light Mode Variables */
+        --color-background: #ffffff;
+        --color-surface: #f4f4f5; /* zinc-100 */
+        --color-border: #e4e4e7; /* zinc-200 */
+        --color-text: #09090b; /* zinc-950 */
+        --color-text-muted: #71717a; /* zinc-500 */
+        --color-primary-fg: #ffffff;
+      }
+
+      .dark {
+        /* Dark Mode Variables */
+        --color-background: #050505;
+        --color-surface: #0F0F11;
+        --color-border: #27272a; /* zinc-800 */
+        --color-text: #f4f4f5; /* zinc-100 */
+        --color-text-muted: #a1a1aa; /* zinc-400 */
+        --color-primary-fg: #000000;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--color-background);
+        color: var(--color-text);
+        overflow-x: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--color-background);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--color-border);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-text-muted);
+      }
+      
+      /* Subtle moving gradient background - adjusted for light/dark */
+      .bg-gradient-animate {
+        position: relative;
+      }
+      .bg-gradient-animate::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: radial-gradient(circle at 50% 50%, rgba(76, 29, 149, 0.05), rgba(0, 0, 0, 0) 50%),
+                    radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.05), rgba(0, 0, 0, 0) 30%);
+        pointer-events: none;
+      }
+      .dark .bg-gradient-animate::before {
+        background: radial-gradient(circle at 50% 50%, rgba(76, 29, 149, 0.15), rgba(0, 0, 0, 0) 50%),
+                    radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.1), rgba(0, 0, 0, 0) 30%);
+        animation: pulse-glow 10s infinite alternate;
+      }
+
+      @keyframes pulse-glow {
+        0% { opacity: 0.5; }
+        100% { opacity: 0.8; }
+      }
+
+      /* Music Visualizer Animation */
+      @keyframes music-bar {
+        0%, 100% { height: 20%; }
+        50% { height: 100%; }
+      }
+      .music-bar-1 { animation: music-bar 0.8s infinite ease-in-out; animation-delay: 0s; }
+      .music-bar-2 { animation: music-bar 0.8s infinite ease-in-out; animation-delay: 0.1s; }
+      .music-bar-3 { animation: music-bar 0.8s infinite ease-in-out; animation-delay: 0.2s; }
+      .music-bar-4 { animation: music-bar 0.8s infinite ease-in-out; animation-delay: 0.3s; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: 'var(--color-background)',
+                        surface: 'var(--color-surface)',
+                        border: 'var(--color-border)',
+                        text: {
+                            DEFAULT: 'var(--color-text)',
+                            muted: 'var(--color-text-muted)'
+                        },
+                        'primary-fg': 'var(--color-primary-fg)',
+                        primary: '#6366f1', // Indigo
+                        accent: '#a855f7', // Purple
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.32.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
